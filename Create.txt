@@ -1,0 +1,37 @@
+create table ers_reimbursement (
+	reimb_id serial primary key not null,
+	reimb_amount float not null,
+	reimb_submitted timestamp not null,
+	reimb_resolved timestamp,
+	reimb_description varchar(250),
+	reimb_receipt bytea,
+	reimb_author integer REFERENCES ers_users(ers_users_id) NOT NULL,
+	reimb_resolver integer REFERENCES ers_users(ers_users_id),
+	reimb_status_id integer REFERENCES ers_reimbursement_status(reimb_status_id) NOT NULL,
+	reimb_type_id integer REFERENCES ers_reimbursement_type(reimb_type_id) NOT null
+)
+
+CREATE TABLE ers_users (
+	ers_users_id serial PRIMARY KEY NOT NULL,
+	ers_username varchar(50) UNIQUE NOT NULL,
+	ers_password varchar(50) NOT NULL,
+	user_first_name varchar(100) NOT NULL,
+	user_last_name varchar(100) NOT NULL,
+	user_email varchar(150) UNIQUE NOT NULL,
+	user_role_id integer REFERENCES ers_user_roles(ers_user_role_id) NOT NULL
+)
+
+CREATE TABLE ers_reimbursement_status (
+	reimb_status_id serial PRIMARY KEY NOT NULL,
+	reimb_status varchar(10) NOT null
+)
+
+CREATE TABLE ers_reimbursement_type (
+	reimb_type_id serial PRIMARY KEY NOT NULL,
+	reimb_type varchar(10) NOT null
+)
+
+CREATE TABLE ers_user_roles (
+	ers_user_role_id serial PRIMARY KEY NOT NULL,
+	user_role varchar(10) NOT null
+)
