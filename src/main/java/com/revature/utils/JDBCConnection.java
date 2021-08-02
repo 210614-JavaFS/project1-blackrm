@@ -15,6 +15,7 @@ public class JDBCConnection {
 	public static Connection makeConnection() throws SQLException{
 		// TODO Auto-generated method stub
 		//configure
+		
 
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -39,12 +40,7 @@ public class JDBCConnection {
 //				e.printStackTrace();
 //			}
 		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 		return DriverManager.getConnection(url, user, password);
 		
