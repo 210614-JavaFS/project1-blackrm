@@ -21,22 +21,19 @@ public class FrontControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("application/json");
 		
-//		JDBCConnection.makeConnection();
 		
 		response.setStatus(404);
 
 		final String URL = request.getRequestURI().replace("/project1/", "");
 
-		System.out.println(URL);
 
 		String[] UrlSections = URL.split("/");
 		
-		for(int k = 0; k < UrlSections.length; k++)
-			System.out.println(UrlSections[k]);
+		
 
 		switch (UrlSections[0]) {
 		case "login":
-			userController.logIn(response, UrlSections[0], UrlSections[1]);
+			userController.logIn(response, UrlSections[1], UrlSections[2]);
 			break;
 		
 		}
