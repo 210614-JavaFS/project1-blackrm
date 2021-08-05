@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.revature.controllers.ReimbursementsController;
 import com.revature.controllers.UserController;
-import com.revature.utils.JDBCConnection;
 
 public class FrontControllerServlet extends HttpServlet {
 	
@@ -28,16 +27,25 @@ public class FrontControllerServlet extends HttpServlet {
 
 
 		String[] UrlSections = URL.split("/");
-		
-		
 
 		switch (UrlSections[0]) {
 		case "login":
-			userController.logIn(response, UrlSections[1], UrlSections[2]);
+			if(UrlSections.length == 3)
+				userController.logIn(response, UrlSections[1], UrlSections[2]);
 			break;
-		
+		case "employee":
+			if(UrlSections.length == 1) {
+				reimbursementsController.addNew(request, response);
+			} else if(UrlSections.length == 2)
+				reimbursementsController.getMyReimbs(response, UrlSections[1]);
+			break;
+		case "finance":
+			if(UrlSections.length == 2)
+				reimbursementsController.getRequestedReimbs(response, UrlSections[1]);
+			else
+				reimbursementsController.updateReimb(response, UrlSections[1], UrlSections[2], UrlSections[3]);
+			break;
 		}
-		
 	}
 
 	@Override

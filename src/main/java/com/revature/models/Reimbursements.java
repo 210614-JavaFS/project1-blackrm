@@ -6,16 +6,15 @@ public class Reimbursements {
 	
 	private int id;
 	private double amount;
-	private Date submitted;
-	private Date resolved;
+	private String submitted;
+	private String resolved;
 	private String description;
 	private byte receipt;
 	private int author;
 	private int resolver;
 	private int statusId;
 	private int typeId;
-	
-	public Reimbursements(int id, double amount, Date submitted, Date resolved, String description, byte receipt,
+	public Reimbursements(int id, double amount, String submitted, String resolved, String description, byte receipt,
 			int author, int resolver, int statusId, int typeId) {
 		super();
 		this.id = id;
@@ -29,92 +28,70 @@ public class Reimbursements {
 		this.statusId = statusId;
 		this.typeId = typeId;
 	}
-
 	public Reimbursements() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public double getAmount() {
 		return amount;
 	}
-
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-
-	public Date getSubmitted() {
+	public String getSubmitted() {
 		return submitted;
 	}
-
-	public void setSubmitted(Date submitted) {
+	public void setSubmitted(String submitted) {
 		this.submitted = submitted;
 	}
-
-	public Date getResolved() {
+	public String getResolved() {
 		return resolved;
 	}
-
-	public void setResolved(Date resolved) {
+	public void setResolved(String resolved) {
 		this.resolved = resolved;
 	}
-
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public byte getReceipt() {
 		return receipt;
 	}
-
 	public void setReceipt(byte receipt) {
 		this.receipt = receipt;
 	}
-
 	public int getAuthor() {
 		return author;
 	}
-
 	public void setAuthor(int author) {
 		this.author = author;
 	}
-
 	public int getResolver() {
 		return resolver;
 	}
-
 	public void setResolver(int resolver) {
 		this.resolver = resolver;
 	}
-
 	public int getStatusId() {
 		return statusId;
 	}
-
 	public void setStatusId(int statusId) {
 		this.statusId = statusId;
 	}
-
 	public int getTypeId() {
 		return typeId;
 	}
-
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -133,7 +110,6 @@ public class Reimbursements {
 		result = prime * result + typeId;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -174,7 +150,6 @@ public class Reimbursements {
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
 		return "Reimbursements [id=" + id + ", amount=" + amount + ", submitted=" + submitted + ", resolved=" + resolved
@@ -182,4 +157,5 @@ public class Reimbursements {
 				+ resolver + ", statusId=" + statusId + ", typeId=" + typeId + "]";
 	}
 	
+
 }

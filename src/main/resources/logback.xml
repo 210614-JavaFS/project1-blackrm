@@ -10,14 +10,14 @@
   
   
   <!-- This is a file appender that will print to a file. -->
- <!--     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logs\\log.txt</file>
+      <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>C:\\Users\\Owner\\Revature_3\\Project1\\project1-blackrm\\logs\\log.txt</file>
         <append>true</append>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%mdc] [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
--->
+
   <root level="all">
     <appender-ref ref="STDOUT" />
     <appender-ref ref="FILE" />

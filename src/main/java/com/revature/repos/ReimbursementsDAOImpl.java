@@ -34,8 +34,8 @@ public class ReimbursementsDAOImpl implements ReimbursementsDAO {
 				Reimbursements reimb = new Reimbursements();
 				reimb.setId(rs.getInt(1));
 				reimb.setAmount(rs.getDouble(2));
-				reimb.setSubmitted(rs.getDate(3));
-				reimb.setResolved(rs.getDate(4));
+				reimb.setSubmitted(rs.getString(3));
+				reimb.setResolved(rs.getString(4));
 				reimb.setDescription(rs.getString(5));
 				reimb.setAuthor(rs.getInt(6));
 				reimb.setResolver(rs.getInt(7));
@@ -70,10 +70,10 @@ public class ReimbursementsDAOImpl implements ReimbursementsDAO {
 				Reimbursements reimb = new Reimbursements();
 				reimb.setId(rs.getInt(1));
 				reimb.setAmount(rs.getDouble(2));
-				reimb.setSubmitted(rs.getDate(3));
-				reimb.setResolved(rs.getDate(4));
+				reimb.setSubmitted(rs.getString(3));
+				reimb.setResolved(rs.getString(4));
 				reimb.setDescription(rs.getString(5));
-				reimb.setAuthor(rs.getInt(6));
+				reimb.setAuthor(id);
 				reimb.setResolver(rs.getInt(7));
 				reimb.setStatusId(rs.getInt(8));
 				reimb.setTypeId(rs.getInt(9));
@@ -106,8 +106,8 @@ public class ReimbursementsDAOImpl implements ReimbursementsDAO {
 				Reimbursements reimb = new Reimbursements();
 				reimb.setId(rs.getInt(1));
 				reimb.setAmount(rs.getDouble(2));
-				reimb.setSubmitted(rs.getDate(3));
-				reimb.setResolved(rs.getDate(4));
+				reimb.setSubmitted(rs.getString(3));
+				reimb.setResolved(rs.getString(4));
 				reimb.setDescription(rs.getString(5));
 				reimb.setAuthor(rs.getInt(6));
 				reimb.setResolver(rs.getInt(7));
@@ -127,8 +127,13 @@ public class ReimbursementsDAOImpl implements ReimbursementsDAO {
 	public String addReimbursement(Reimbursements reimbursement) {
 		// TODO Auto-generated method stub
 		String myMessage = "";
+		if(reimbursement.getAmount() <= 0) {
+			System.out.println("Invalid transaction");
+			myMessage = "Invalid transaction";
+			return myMessage;
+		}
 		Date date = new java.util.Date();
-		reimbursement.setSubmitted(date);
+		reimbursement.setSubmitted(date.toString());
 		reimbursement.setStatusId(1);
 		try (Connection conn = JDBCConnection.makeConnection()){
 			PreparedStatement pstmt = conn.prepareStatement("insert into "
@@ -137,7 +142,7 @@ public class ReimbursementsDAOImpl implements ReimbursementsDAO {
 					+ "reimb_type_id) values (?,?,?,?,?,?)");
 			logger.debug("adding a reimbursement");
 			pstmt.setDouble(1, reimbursement.getAmount());
-			pstmt.setDate(2, (java.sql.Date) reimbursement.getSubmitted());
+			pstmt.setString(2, reimbursement.getSubmitted());
 			pstmt.setString(3, reimbursement.getDescription());
 			pstmt.setInt(4, reimbursement.getAuthor());
 			pstmt.setInt(5, reimbursement.getStatusId());
@@ -157,18 +162,19 @@ public class ReimbursementsDAOImpl implements ReimbursementsDAO {
 		// TODO Auto-generated method stub
 		String myMessage = "";
 		Date date = new java.util.Date();
+		String date2 = date.toString();
 		try (Connection conn = JDBCConnection.makeConnection()){
 			PreparedStatement pstmt = conn.prepareStatement("update "
 					+ "ers_reimbursement set reimb_resolved = ?, "
 					+ "reimb_resolver = ?, reimb_status_id = ? "
 					+ "where reimb_id = ?");
 			logger.debug("updating reimbursement " + id);
-			pstmt.setDate(1, (java.sql.Date) date);
+			pstmt.setString(1, date2);
 			pstmt.setInt(2, resolver);
 			pstmt.setInt(3, status);
 			pstmt.setInt(4, id);
 			pstmt.executeUpdate();
-			myMessage = "Reimbursement " + id + " updated";
+			myMessage = "Reimbursement updated";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.error("reimbursement could not be updated", e);
